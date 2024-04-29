@@ -11,8 +11,10 @@ const state = {
 //metodos
 
 const loadNextPage = async() => {
-  await loadUsersbypage(state.currentPage + 1);
-
+  const users = await loadUsersbypage(state.currentPage + 1);
+  if (users.length === 0) return;
+  state.currentPage += 1;
+  state.users = users;
 }
 
 const loadPreviousPage = async() => {
@@ -35,6 +37,16 @@ export default {
   onUserChanged,
   reloadPage,
   
-  getUser: () => [...state.users],
+
+  /**
+   * 
+   * @returns {User[]}
+   */
+  getUsers: () => [...state.users],
+
+  /**
+   * 
+   * @returns {Number}
+   */
   getCurrentPage: () => state.currentPage,
 }
