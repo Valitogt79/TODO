@@ -4,7 +4,7 @@ button {
 
 #current-page {
   font-size: 1.3rem;
-  color: #fff;
+  color: #fff !important;
   margin-right: 10px;
   margin-left: 10px;
 }

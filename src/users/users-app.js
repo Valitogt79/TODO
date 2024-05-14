@@ -3,6 +3,7 @@ import { renderTable } from './presentetion/render-table/render-table';
 import { reenderButtons } from './presentetion/render-buttons/reder-buttons';
 import { renderAddButton } from './presentetion/render-add-button/render-add-button';
 import { renderModal } from './presentetion/render-modal/render-modal';
+import { saveUser } from './use-cases/save-user';
 
 /**
  * 
@@ -16,5 +17,9 @@ export const UsersApp = async (element) => {
   renderTable( element );
   reenderButtons( element );
   renderAddButton( element );
-  renderModal(element );
+  renderModal(element, async ( userLike ) => {
+    const user = await saveUser( userLike );
+    usersStore.onUserChanged( user );
+    renderTable( element );
+  });
 };
